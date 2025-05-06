@@ -1,6 +1,7 @@
 package test;
 import src.function.game.Move;
 import src.function.game.PrintSquare;
+import src.function.game.RandomNumberGenerate;
 
 public class Test {
     public static void main(String[] args) {
@@ -29,6 +30,7 @@ public class Test {
         } else {
             System.out.println("testComprehensive failed");
         }
+        testRandomNumberGenerate();
     } 
 
     public static boolean testMoveLeft() {
@@ -138,4 +140,13 @@ public class Test {
         };
         return java.util.Arrays.deepEquals(s.matrix, expected);
     }
+
+    public static void testRandomNumberGenerate() {
+        src.function.game.GameStruct s = new src.function.game.GameStruct();
+        s.matrix[0][0] = 4;
+        Move.moveLeft(s);
+        RandomNumberGenerate.generateNumber(s);
+        PrintSquare.print(s);
+    }
 }
+
