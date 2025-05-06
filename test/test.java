@@ -1,8 +1,8 @@
 package test;
-import src.*;
-import src.function.game.printSquare;
+import src.function.game.Move;
+import src.function.game.PrintSquare;
 
-public class test {
+public class Test {
     public static void main(String[] args) {
         if(testMoveLeft()) {
             System.out.println("testMoveLeft passed");
@@ -24,84 +24,118 @@ public class test {
         } else {
             System.out.println("testMoveDown failed");
         }
+        if(testComprehensive()) {
+            System.out.println("testComprehensive passed");
+        } else {
+            System.out.println("testComprehensive failed");
+        }
     } 
 
     public static boolean testMoveLeft() {
-        src.function.game.square s = new src.function.game.square();
-        s.square[0][0] = 4;
-        s.square[0][1] = 2;
-        s.square[0][2] = 2;
-        s.square[0][3] = 0;
-        s.square[1][0] = 0;
-        s.square[1][1] = 2;
-        s.square[1][2] = 8;
-        s.square[1][3] = 0;
+        src.function.game.GameStruct s = new src.function.game.GameStruct();
+        s.matrix[0][0] = 4;
+        s.matrix[0][1] = 8;
+        s.matrix[0][2] = 2;
+        s.matrix[0][3] = 2;
+        s.matrix[1][0] = 0;
+        s.matrix[1][1] = 2;
+        s.matrix[1][2] = 8;
+        s.matrix[1][3] = 0;
         int[][] expected = {
-            {4, 4, 0, 0},
+            {4, 8, 4, 0},
             {2, 8, 0, 0},
             {0, 0, 0, 0},
             {0, 0, 0, 0}
         };
-        src.function.game.move.moveleft(s);
-        return java.util.Arrays.deepEquals(s.square, expected);
+        src.function.game.Move.moveLeft(s);
+        return java.util.Arrays.deepEquals(s.matrix, expected);
     }
 
     public static boolean testMoveRight() {
-        src.function.game.square s = new src.function.game.square();
-        s.square[0][0] = 4;
-        s.square[0][1] = 2;
-        s.square[0][2] = 2;
-        s.square[0][3] = 0;
-        s.square[1][0] = 0;
-        s.square[1][1] = 2;
-        s.square[1][2] = 8;
-        s.square[1][3] = 0;
+        src.function.game.GameStruct s = new src.function.game.GameStruct();
+        s.matrix[0][0] = 4;
+        s.matrix[0][1] = 2;
+        s.matrix[0][2] = 2;
+        s.matrix[0][3] = 0;
+        s.matrix[1][0] = 0;
+        s.matrix[1][1] = 2;
+        s.matrix[1][2] = 8;
+        s.matrix[1][3] = 0;
         int[][] expected = {
             {0, 0, 4, 4},
             {0, 0, 2, 8},
             {0, 0, 0, 0},
             {0, 0, 0, 0}
         };
-        src.function.game.move.moveright(s);
-        return java.util.Arrays.deepEquals(s.square, expected);
+        src.function.game.Move.moveRight(s);
+        return java.util.Arrays.deepEquals(s.matrix, expected);
     }
+
     public static boolean testMoveUp() {
-        src.function.game.square s = new src.function.game.square();
-        s.square[0][0] = 4;
-        s.square[0][1] = 2;
-        s.square[0][2] = 2;
-        s.square[0][3] = 0;
-        s.square[1][0] = 0;
-        s.square[1][1] = 2;
-        s.square[1][2] = 8;
-        s.square[1][3] = 0;
+        src.function.game.GameStruct s = new src.function.game.GameStruct();
+        s.matrix[2][0] = 4;
+        s.matrix[1][0] = 2;
+        s.matrix[3][0] = 4;
         int[][] expected = {
-            {4, 4, 2, 0},
-            {0, 0, 8, 0},
+            {2, 0, 0, 0},
+            {8, 0, 0, 0},
             {0, 0, 0, 0},
             {0, 0, 0, 0}
         };
-        src.function.game.move.moveup(s);
-        return java.util.Arrays.deepEquals(s.square, expected);
+        src.function.game.Move.moveUp(s);
+        return java.util.Arrays.deepEquals(s.matrix, expected);
     }
 
     public static boolean testMoveDown() {
-        src.function.game.square s = new src.function.game.square();
-        s.square[0][0] = 4;
-        s.square[0][1] = 2;
-        s.square[0][2] = 2;
-        s.square[0][3] = 0;
-        s.square[1][0] = 0;
-        s.square[1][1] = 2;
-        s.square[1][2] = 8;
-        s.square[1][3] = 0;
+        src.function.game.GameStruct s = new src.function.game.GameStruct();
+        s.matrix[0][0] = 4;
+        s.matrix[1][0] = 4;
+        s.matrix[2][0] = 4;
         int[][] expected = {
             {0, 0, 0, 0},
             {0, 0, 0, 0},
-            {0, 0, 2, 0},
-            {4, 4, 8, 0}
+            {4, 0, 0, 0},
+            {8, 0, 0, 0}
         };
-        src.function.game.move.movedown(s);
-        return java.util.Arrays.deepEquals(s.square, expected);
+        src.function.game.Move.moveDown(s);
+        return java.util.Arrays.deepEquals(s.matrix, expected);
+    }
+    
+    public static boolean testComprehensive(){
+        src.function.game.GameStruct s = new src.function.game.GameStruct();
+        s.matrix[0][0] = 4;
+        s.matrix[0][1] = 2;
+        s.matrix[0][2] = 2;
+        s.matrix[0][3] = 0;
+        s.matrix[1][0] = 2;
+        s.matrix[1][1] = 8;
+        s.matrix[1][2] = 0;
+        s.matrix[1][3] = 0;
+        s.matrix[2][0] = 0;
+        s.matrix[2][1] = 0;
+        s.matrix[2][2] = 8;
+        s.matrix[2][3] = 2;
+        s.matrix[3][0] = 2;
+        s.matrix[3][1] = 4;
+        s.matrix[3][2] = 0;
+        s.matrix[3][3] = 2;
+
+     /*  {{4,2,2,0},
+        {2,8,0,0},
+        {0,0,8,2},
+        {2,4,0,2}};*/
+
+        Move.moveDown(s);
+        Move.moveLeft(s);
+        Move.moveRight(s);
+        Move.moveUp(s);
+
+        int[][] expected = {
+            {0,4,8,4},
+            {0,0,16,4},
+            {0,0,0,0},
+            {0,0,0,0}
+        };
+        return java.util.Arrays.deepEquals(s.matrix, expected);
     }
 }

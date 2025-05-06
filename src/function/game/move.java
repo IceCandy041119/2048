@@ -1,106 +1,112 @@
 package src.function.game;
 
-public class move {
-   public static void moveleft(square square){
-      for(int i = 0; i < square.square.length; i++){
-         for(int j = 0; j < square.square[i].length; j++){
-            if(square.square[i][j] != 0){
-               int k = j - 1;
-               while(k >= 0 && square.square[i][k] == 0){
-                  square.square[i][k] = square.square[i][j];
-                  square.square[i][j] = 0;
+public class Move{
+   public static void moveLeft(GameStruct s){
+      for(int i = 0; i < 4; i++){
+         for(int j = 1; j < 4; j++){
+            if(s.matrix[i][j] != 0){
+               int k = j;
+               while(k > 0 && s.matrix[i][k-1] == 0){
+                  s.matrix[i][k-1] = s.matrix[i][k];
+                  s.matrix[i][k] = 0;
                   k--;
                }
             }
          }
       }
-      for(int i = 0; i < square.square.length; i++){
-         for(int j = 0; j < square.square[i].length - 1; j++){
-            if(square.square[i][j] == square.square[i][j + 1]){
-               square.square[i][j] *= 2;
-               square.square[i][j + 1] = 0;
-               for(int k = j + 1; k < square.square[i].length - 1; k++){
-                  square.square[i][k] = square.square[i][k + 1];
+      for(int i = 0; i < 4; i++){
+         for(int j = 0; j < 3; j++){
+            if(s.matrix[i][j] == s.matrix[i][j+1] && s.matrix[i][j] != 0){
+               s.matrix[i][j] *= 2;
+               s.score += s.matrix[i][j];
+               s.matrix[i][j+1] = 0;
+               for(int k = j+1; k < 3; k++){
+                  s.matrix[i][k] = s.matrix[i][k+1];
+                  s.matrix[i][k+1] = 0;
                }
             }
          }
-      }
-
-   } 
-   public static void moveright(square square){
-      for(int i = 0; i < square.square.length; i++){
-         for(int j = square.square[i].length - 1; j >= 0; j--){
-            if(square.square[i][j] != 0){
-               int k = j + 1;
-               while(k < square.square[i].length && square.square[i][k] == 0){
-                  square.square[i][k] = square.square[i][j];
-                  square.square[i][j] = 0;
+      }  
+   }
+   public static void moveRight(GameStruct s){
+      for(int i = 0; i < 4; i++){
+         for(int j = 2; j >= 0; j--){
+            if(s.matrix[i][j] != 0){
+               int k = j;
+               while(k < 3 && s.matrix[i][k+1] == 0){
+                  s.matrix[i][k+1] = s.matrix[i][k];
+                  s.matrix[i][k] = 0;
                   k++;
                }
             }
          }
       }
-      for(int i = 0; i < square.square.length; i++){
-         for(int j = square.square[i].length - 1; j > 0; j--){
-            if(square.square[i][j] == square.square[i][j - 1]){
-               square.square[i][j] *= 2;
-               square.square[i][j - 1] = 0;
-               for(int k = j - 1; k > 0; k--){
-                  square.square[i][k] = square.square[i][k - 1];
+      for(int i = 0; i < 4; i++){
+         for(int j = 3; j > 0; j--){
+            if(s.matrix[i][j] == s.matrix[i][j-1] && s.matrix[i][j] != 0){
+               s.matrix[i][j] *= 2;
+               s.score += s.matrix[i][j];
+               s.matrix[i][j-1] = 0;
+               for(int k = j-1; k > 0; k--){
+                  s.matrix[i][k] = s.matrix[i][k-1];
+                  s.matrix[i][k-1] = 0;
                }
             }
          }
       }
-   } 
-   public static void moveup(square square){
-      for(int i = 0; i < square.square.length; i++){
-         for(int j = 0; j < square.square[i].length; j++){
-            if(square.square[j][i] != 0){
-               int k = j - 1;
-               while(k >= 0 && square.square[k][i] == 0){
-                  square.square[k][i] = square.square[j][i];
-                  square.square[j][i] = 0;
+   }
+   public static void moveUp(GameStruct s){
+      for(int j = 0; j < 4; j++){
+         for(int i = 1; i < 4; i++){
+            if(s.matrix[i][j] != 0){
+               int k = i;
+               while(k > 0 && s.matrix[k-1][j] == 0){
+                  s.matrix[k-1][j] = s.matrix[k][j];
+                  s.matrix[k][j] = 0;
                   k--;
                }
             }
          }
       }
-      for(int i = 0; i < square.square.length; i++){
-         for(int j = 0; j < square.square[i].length - 1; j++){
-            if(square.square[j][i] == square.square[j + 1][i]){
-               square.square[j][i] *= 2;
-               square.square[j + 1][i] = 0;
-               for(int k = j + 1; k < square.square[i].length - 1; k++){
-                  square.square[k][i] = square.square[k + 1][i];
+      for(int j = 0; j < 4; j++){
+         for(int i = 0; i < 3; i++){
+            if(s.matrix[i][j] == s.matrix[i+1][j] && s.matrix[i][j] != 0){
+               s.matrix[i][j] *= 2;
+               s.score += s.matrix[i][j];
+               s.matrix[i+1][j] = 0;
+               for(int k = i+1; k < 3; k++){
+                  s.matrix[k][j] = s.matrix[k+1][j];
+                  s.matrix[k+1][j] = 0;
                }
             }
          }
-      }
-   } 
-   public static void movedown(square square){
-      for(int i = 0; i < square.square.length; i++){
-         for(int j = square.square[i].length - 1; j >= 0; j--){
-            if(square.square[j][i] != 0){
-               int k = j + 1;
-               while(k < square.square[i].length && square.square[k][i] == 0){
-                  square.square[k][i] = square.square[j][i];
-                  square.square[j][i] = 0;
+      }  
+   }
+   public static void moveDown(GameStruct s){
+      for(int j = 0; j < 4; j++){
+         for(int i = 2; i >= 0; i--){
+            if(s.matrix[i][j] != 0){
+               int k = i;
+               while(k < 3 && s.matrix[k+1][j] == 0){
+                  s.matrix[k+1][j] = s.matrix[k][j];
+                  s.matrix[k][j] = 0;
                   k++;
                }
             }
          }
-         printSquare.print(square);
       }
-      for(int i = 0; i < square.square.length; i++){
-         for(int j = square.square[i].length - 1; j > 0; j--){
-            if(square.square[j][i] == square.square[j - 1][i]){
-               square.square[j][i] *= 2;
-               square.square[j - 1][i] = 0;
-               for(int k = j - 1; k > 0; k--){
-                  square.square[k][i] = square.square[k - 1][i];
+      for(int j = 0; j < 4; j++){
+         for(int i = 3; i > 0; i--){
+            if(s.matrix[i][j] == s.matrix[i-1][j] && s.matrix[i][j] != 0){
+               s.matrix[i][j] *= 2;
+               s.score += s.matrix[i][j];
+               s.matrix[i-1][j] = 0;
+               for(int k = i-1; k > 0; k--){
+                  s.matrix[k][j] = s.matrix[k-1][j];
+                  s.matrix[k-1][j] = 0;
                }
             }
          }
-      }
-   } 
+      }  
+   }
 }

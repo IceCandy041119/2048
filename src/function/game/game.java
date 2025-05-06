@@ -1,12 +1,12 @@
 package src.function.game;
 
-public class game {
+public class Game {
     public static void runGame(){
-        square s = new square();
-        s.square[0][1] = 2;
-        s.square[0][2] = 2;
-        s.square[0][3] = 2;
-        move.moveleft(s);
-        printSquare.print(s);
+        GameStruct s = new GameStruct();
+        s.matrix[0][1] = 2;
+        s.matrix[0][2] = 2;
+        s.matrix[0][3] = 2;
+        Move.moveLeft(s);
+        PrintSquare.print(s);
     }
 }
