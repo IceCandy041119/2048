@@ -29,7 +29,7 @@ public class RandomNumberGenerate {
         int randomIndex = (int) (random * emptyPositions.size());
         Position randomPosition = emptyPositions.get(randomIndex);
         int randomNumber = generateRandomNumber();
-        GameStruct.setMatrixElement(s, randomPosition.x, randomPosition.y, randomNumber);
+        s.setMatrixElement(s, randomPosition.x, randomPosition.y, randomNumber);
    }
 
 }
