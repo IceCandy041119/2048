@@ -8,6 +8,9 @@ import java.awt.Graphics2D;
 import java.awt.event.KeyEvent;
 import java.awt.image.BufferedImage;
 
+import javax.swing.JButton;
+import javax.swing.JDialog;
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
@@ -15,6 +18,7 @@ import src.function.game.GameStruct;
 import src.function.game.IsGameOver;
 import src.function.game.Move;
 import src.function.game.RandomNumberGenerate;
+import src.function.music.MoveSound;
 
 public class GamePanel extends JPanel implements GameEnvironment {
     private Map<Integer, BufferedImage> imageMap;
@@ -29,14 +33,11 @@ public class GamePanel extends JPanel implements GameEnvironment {
         LoadImage();
 
         RandomNumberGenerate.generateNumber(gameStruct);
-        RandomNumberGenerate.generateNumber(gameStruct);
         
         
     }
 
 
-
-    
      
     public void LoadImage(){
         try{
@@ -75,6 +76,9 @@ public class GamePanel extends JPanel implements GameEnvironment {
     }
 
     public void move(int direction){
+
+        if(gameStruct.isMove == 1 || gameStruct.isMerge == 1)
+            MoveSound.playMoveSound(); 
         switch (direction){
             case KeyEvent.VK_UP:
                 Move.moveUp(this.gameStruct);
@@ -90,6 +94,9 @@ public class GamePanel extends JPanel implements GameEnvironment {
                 break;
         }
 
+
+
+
         if(gameStruct.isMove == 1 || gameStruct.isMerge == 1){
             RandomNumberGenerate.generateNumber(this.gameStruct);
         }
@@ -97,11 +104,15 @@ public class GamePanel extends JPanel implements GameEnvironment {
         repaint();
 
         if(IsGameOver.isGameOver(this.gameStruct)){
-            JOptionPane.showMessageDialog(this, "Game Over! Your score is: " + gameStruct.score, "Game Over", JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(this, "Game Over! Your score is: " + gameStruct.score + "\nPress 'R' restart game", "Game Over", JOptionPane.INFORMATION_MESSAGE);
         }
         
         
     }
 
+    public void restartGame(){
+        gameStruct.reStart();
+        repaint();
+    }
 
 }

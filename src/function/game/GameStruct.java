@@ -10,4 +10,16 @@ public class GameStruct {
       s.matrix[x][y] = value;
    }
 
+   public void reStart(){
+      score = 0;
+      isMove = 0;
+      isMerge = 0;
+      for(int i = 0; i < matrix.length; i++){
+         for(int j = 0; j < matrix[i].length; j++){
+            matrix[i][j] = 0;
+         }
+      }
+      RandomNumberGenerate.generateNumber(this);
+   }
+
 }
