@@ -62,7 +62,7 @@
 1. 确保已安装 Java 环境（JDK 8 或更高版本）。
 2. 将项目克隆到本地：
    ```bash
-   git clone <https://github.com/IceCandy041119/2048>
+   git clone https://github.com/IceCandy041119/2048
    cd 2048
    ```
 ## 操作说明
