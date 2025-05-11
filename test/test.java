@@ -1,12 +1,10 @@
 package test;
 
 import java.awt.event.KeyEvent;
-import java.util.Random;
 
 import src.function.core.GameStruct;
 import src.function.core.Move;
 import src.function.core.PrintSquare;
-import src.function.core.RandomNumberGenerate;
 import src.function.shell.GameEnvironment;
 
 public class test implements GameEnvironment {

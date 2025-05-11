@@ -3,7 +3,6 @@ package src.function.shell;
 import java.awt.Graphics;
 import java.awt.Image;
 
-import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JPanel;
 

@@ -1,6 +1,5 @@
 package src.function.shell;
 import javax.swing.*;
-import javax.swing.plaf.basic.BasicInternalFrameTitlePane.SystemMenuBar;
 
 import src.function.core.GameStruct;
 import src.function.core.IsGameOver;

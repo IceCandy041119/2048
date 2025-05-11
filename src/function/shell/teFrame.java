@@ -4,7 +4,6 @@ import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
 
-import src.function.music.MoveSound;
 import src.function.music.PlayBGM;
 
 public class teFrame implements GameEnvironment {

@@ -1,10 +1,12 @@
 package src.function.shell;
 
+import java.awt.Image;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
 
-import src.function.music.MoveSound;
+import javax.swing.ImageIcon;
+
 import src.function.music.PlayBGM;
 
 public class Frame implements GameEnvironment {
@@ -14,6 +16,7 @@ public class Frame implements GameEnvironment {
         frame.setDefaultCloseOperation(javax.swing.JFrame.EXIT_ON_CLOSE);
         frame.setSize(backgroundWidth, backgroundHeight);
         frame.setResizable(false);
+        frame.setIconImage(new ImageIcon("pic/2048.png").getImage());
         frame.setLocationRelativeTo(null); // Center the frame on the screen
         GameBackground gbg = new GameBackground();
         frame.add(gbg);
