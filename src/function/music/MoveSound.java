@@ -13,14 +13,7 @@ public class MoveSound {
             Clip clip = AudioSystem.getClip();
             AudioInputStream inputStream = AudioSystem.getAudioInputStream(new File("src/function/music/move.wav"));
             clip.open(inputStream);
-            
-            //clip.addLineListener(event -> {
-             //   if (event.getType() == LineEvent.Type.STOP) {
-             //       clip.close();
-             //   }
-           // });
             clip.start();
-           // Thread.sleep(clip.getMicrosecondLength()/400);
         }catch (Exception e){
             System.out.println("Error playing sound: " + e.getMessage());
         }
