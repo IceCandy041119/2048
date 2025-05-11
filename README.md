@@ -13,25 +13,14 @@
 
 ## 项目结构
 .    
-├── .gitignore    
-├── README.md   
-├── pic/ # 存放游戏图片资源   
-├── rubbish/ # 存放无用的音频文件   
-├── sound/ # 存放背景音乐文件   
-├── src/ # 项目源码    
-│    
-├── Main/ # 主入口    
-│    
-├── function/    
-    │   
-    │    
-    ├── core/ # 游戏核心逻辑    
-    │  
-    │  
-    ├── music/ # 音乐播放相关功能   
-    │  
-    │  
-    ├── shell/ # 游戏界面相关功能   
+├─pic  
+├─sound  
+└─src  
+    ├─function  
+    │  ├─core  
+    │  ├─music  
+    │  └─shell  
+    └─Main  
 
 ## 文件说明
 
