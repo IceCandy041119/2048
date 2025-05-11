@@ -7,10 +7,10 @@ import java.awt.event.MouseAdapter;
 import src.function.music.MoveSound;
 import src.function.music.PlayBGM;
 
-public class Frame implements GameEnvironment {
-    public Frame() {
+public class teFrame implements GameEnvironment {
+    public teFrame() {
         // Constructor code here
-        javax.swing.JFrame frame = new javax.swing.JFrame("Game Frame");
+        javax.swing.JFrame frame = new javax.swing.JFrame("teGame Frame");
         frame.setDefaultCloseOperation(javax.swing.JFrame.EXIT_ON_CLOSE);
         frame.setSize(backgroundWidth, backgroundHeight);
         frame.setResizable(false);
@@ -18,7 +18,7 @@ public class Frame implements GameEnvironment {
         GameBackground gbg = new GameBackground();
         frame.add(gbg);
         gbg.setLayout(null);
-        GamePanel gamePanel = new GamePanel(new src.function.game.GameStruct());
+        teGamePane gamePanel = new teGamePane(new src.function.game.GameStruct());
         gbg.add(gamePanel);
 
         MusicPlayer musicPlayer = new MusicPlayer();
@@ -40,8 +40,6 @@ public class Frame implements GameEnvironment {
                     musicPlayer.nextBGM();
                 else if(e.getKeyCode() == KeyEvent.VK_M)
                     musicPlayer.preBGM();
-                else if(e.getKeyCode() == KeyEvent.VK_R)
-                    gamePanel.restartGame();
                 else
                    // gamePanel.move(e.getKeyCode());
                    gamePanel.animationMove(e.getKeyCode());
@@ -70,24 +68,24 @@ public class Frame implements GameEnvironment {
                 } else {
                     if (mouseClickX < 0) {
                         if (Math.abs(mouseClickX) > Math.abs(mouseClickY)) {
-                            gamePanel.animationMove(37);
+                            gamePanel.move(37);
                         } else {
                             if (mouseClickY < 0) {
-                                gamePanel.animationMove(38);
+                                gamePanel.move(38);
 
                             } else {
-                                gamePanel.animationMove(40);
+                                gamePanel.move(40);
                             }
                         }
                     } else {
                         if (Math.abs(mouseClickX) > Math.abs(mouseClickY)) {
-                            gamePanel.animationMove(39);
+                            gamePanel.move(39);
                         } else {
                             if (mouseClickY < 0) {
-                                gamePanel.animationMove(38);
+                                gamePanel.move(38);
 
                             } else {
-                                gamePanel.animationMove(40);
+                                gamePanel.move(40);
                             }
                         }
                     }
@@ -103,7 +101,7 @@ public class Frame implements GameEnvironment {
         // Main method code here
         javax.swing.SwingUtilities.invokeLater(new Runnable() {
             public void run() {
-                new Frame(); // Create an instance of the Frame class
+                new teFrame(); // Create an instance of the Frame class
             }
         });
     }

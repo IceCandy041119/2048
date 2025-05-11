@@ -40,7 +40,7 @@ public class MusicPlayer extends JPanel implements GameEnvironment {
         g.fillRoundRect(75, 20, 350, 40,20,20);
         g.setColor(Color.orange);
         g.setFont(new java.awt.Font("Arial", java.awt.Font.PLAIN, 20)); 
-        g.drawString("Cureent BGM: " + PlayBGM.currentMusicName, 80, 45);
+        g.drawString("Current BGM: " + PlayBGM.currentMusicName, 80, 45);
     }
 
     public void pauseBGM(){
