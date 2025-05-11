@@ -111,7 +111,7 @@ public class GamePanel extends JPanel implements GameEnvironment {
         SwingUtilities.invokeLater(()->{
             if(gameStruct.isMerge == 1 || gameStruct.isMove == 1){
                 randomNumberIndex = RandomNumberGenerate.generateNumber(gameStruct);
-                System.out.println(randomNumberIndex);
+                //System.out.println(randomNumberIndex);
                 new Thread(()->{
                     randomNumberCellSize = 37;
                     float randomNumberEnlarge = 80;
