@@ -12,26 +12,27 @@
 - **游戏结束检测**：当没有可移动或合并的数字时，显示游戏结束提示。
 
 ## 项目结构
-. 
-├── .gitignore 
-├── README.md 
-├── pic/ # 存放游戏图片资源 
-├── rubbish/ # 存放无用的音频文件 
-├── sound/ # 存放背景音乐文件 
-├── src/ # 项目源码 
-│ 
-├── Main/ # 主入口 
-│ 
-├── function/ 
-    │
-    │
-    ├── core/ # 游戏核心逻辑 
-    │
-    │
-    ├── music/ # 音乐播放相关功能 
-    │
-    │
-    ├── shell/ # 游戏界面相关功能 
+.    
+├── .gitignore    
+├── README.md   
+├── pic/ # 存放游戏图片资源   
+├── rubbish/ # 存放无用的音频文件   
+├── sound/ # 存放背景音乐文件   
+├── src/ # 项目源码    
+│    
+├── Main/ # 主入口    
+│    
+├── function/    
+    │   
+    │    
+    ├── core/ # 游戏核心逻辑    
+    │  
+    │  
+    ├── music/ # 音乐播放相关功能   
+    │  
+    │  
+    ├── shell/ # 游戏界面相关功能   
+
 ## 文件说明
 
 ### 核心逻辑
@@ -61,7 +62,7 @@
 1. 确保已安装 Java 环境（JDK 8 或更高版本）。
 2. 将项目克隆到本地：
    ```bash
-   git clone <repository-url>
+   git clone <https://github.com/IceCandy041119/2048>
    cd 2048
    ```
 ## 操作说明
