@@ -1,4 +1,4 @@
-package src.function.game;
+package src.function.core;
 
 public class PrintSquare {
     public static void print(GameStruct square) {

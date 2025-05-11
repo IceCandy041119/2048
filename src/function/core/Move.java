@@ -1,4 +1,4 @@
-package src.function.game;
+package src.function.core;
 
 public class Move{
    public static void moveLeft(GameStruct s){

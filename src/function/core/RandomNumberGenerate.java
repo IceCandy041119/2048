@@ -1,4 +1,4 @@
-package src.function.game;
+package src.function.core;
 
 import java.util.ArrayList;
 
@@ -12,7 +12,7 @@ public class RandomNumberGenerate {
          return 4; // 20% chance to return 4
       }
    }
-   public static void generateNumber(GameStruct s) {
+   public static int generateNumber(GameStruct s) {
         ArrayList<Position> emptyPositions = new ArrayList<>();
         for(int i = 0; i < 4; i++) {
             for (int j = 0; j < 4; j++) {
@@ -30,6 +30,7 @@ public class RandomNumberGenerate {
         Position randomPosition = emptyPositions.get(randomIndex);
         int randomNumber = generateRandomNumber();
         s.setMatrixElement(s, randomPosition.x, randomPosition.y, randomNumber);
+        return randomPosition.getX() * 4 + randomPosition.getY();
    }
 
 }

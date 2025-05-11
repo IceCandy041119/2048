@@ -1,4 +1,4 @@
-package src.function.wind;
+package src.function.shell;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -12,10 +12,10 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
 
-import src.function.game.GameStruct;
-import src.function.game.IsGameOver;
-import src.function.game.Move;
-import src.function.game.RandomNumberGenerate;
+import src.function.core.GameStruct;
+import src.function.core.IsGameOver;
+import src.function.core.Move;
+import src.function.core.RandomNumberGenerate;
 import src.function.music.MoveSound;
 
 
@@ -25,6 +25,9 @@ public class GamePanel extends JPanel implements GameEnvironment {
     private GameStruct gameStruct;
     private animation[] moveMatrix;
     private boolean isAnimating = false;
+    private float mergeCellSize = 0;
+    private int randomNumberIndex = 0;
+    private float randomNumberCellSize = 75;
 
     class animation{
         float fromX;
@@ -35,7 +38,6 @@ public class GamePanel extends JPanel implements GameEnvironment {
     }
 
     public void animationMove(int direction){
-
         if(isAnimating)
             return ;
 
@@ -110,15 +112,76 @@ public class GamePanel extends JPanel implements GameEnvironment {
         System.out.println("fps: " + fps);
 
         SwingUtilities.invokeLater(()->{
-            if(gameStruct.isMerge == 1 || gameStruct.isMove == 1)
-                RandomNumberGenerate.generateNumber(gameStruct);
+            if(gameStruct.isMerge == 1 || gameStruct.isMove == 1){
+                randomNumberIndex = RandomNumberGenerate.generateNumber(gameStruct);
+                System.out.println(randomNumberIndex);
+                new Thread(()->{
+                    randomNumberCellSize = 37;
+                    float randomNumberEnlarge = 80;
 
+                    long z = System.currentTimeMillis();
+                    int randomNumberTime = 300;
+
+                    while(System.currentTimeMillis() - z < randomNumberTime){
+                        long currentRandomTime = System.currentTimeMillis();
+                        float elapsedRandom = currentRandomTime - z;
+                        float progressRandom = elapsedRandom / randomNumberTime;
+
+                        if(progressRandom < 0.5){
+                            randomNumberCellSize = (float) (randomNumberCellSize + (randomNumberEnlarge - randomNumberCellSize) * (progressRandom / 0.5));
+                        }else{
+                            randomNumberCellSize = (float) (randomNumberCellSize + (cellSize - randomNumberCellSize) * ((progressRandom - 0.5f) / 0.5f ));
+                        }
+
+                        SwingUtilities.invokeLater(this::repaint);
+
+                        try{
+                            Thread.sleep(16);
+                        }catch(InterruptedException e){
+                            e.printStackTrace();
+                        }
+
+                    }
+                    
+                }).start();
+
+            }
             syncMatrix();
             repaint();
-
-            if(IsGameOver.isGameOver(gameStruct))
-                JOptionPane.showMessageDialog(this, "Game Over! Your score is: " + gameStruct.score + "\nPress 'R' to restart game", "Game Over", JOptionPane.INFORMATION_MESSAGE);
             isAnimating = false;
+            if(gameStruct.isMerge == 1){
+                new Thread(()->{
+                    mergeCellSize = 37;
+                    float mergeEnlarge = 80;
+
+                    long y = System.currentTimeMillis();
+                    int mergeTime = 300;
+                    while((System.currentTimeMillis() - y) < mergeTime){
+                        long currentMergeTime = System.currentTimeMillis();
+                        float elapsedMerge = currentMergeTime - y;
+                        float progressMerge = elapsedMerge / mergeTime;
+                        if(progressMerge < 0.5f){
+                            mergeCellSize = mergeCellSize + (mergeEnlarge - mergeCellSize) * (progressMerge / 0.5f);
+                        }else{
+                            mergeCellSize = mergeCellSize + (cellSize - mergeCellSize) * ((progressMerge - 0.5f) / 0.5f);
+                        }
+                        SwingUtilities.invokeLater(this::repaint);
+                    
+                        try{
+                            Thread.sleep(16);
+                        }catch(InterruptedException e){
+                            e.printStackTrace();
+                        }
+                    
+                    
+                    }
+
+                }).start();
+            }
+            if(IsGameOver.isGameOver(gameStruct)){
+                JOptionPane.showMessageDialog(this, "Game Over! Your score is: " + gameStruct.score + "\nPress 'R' to restart game", "Game Over", JOptionPane.INFORMATION_MESSAGE);
+                return;
+            }
         });
 
 
@@ -290,7 +353,7 @@ public class GamePanel extends JPanel implements GameEnvironment {
         setBounds(0, 0, backgroundHeight , backgroundHeight);
         imageMap = new HashMap<>();
         LoadImage();
-        RandomNumberGenerate.generateNumber(gameStruct);
+        randomNumberIndex = RandomNumberGenerate.generateNumber(gameStruct);
 
         moveMatrix = new animation[16];
         for(int i = 0; i < 16; i++){
@@ -334,28 +397,42 @@ public class GamePanel extends JPanel implements GameEnvironment {
 
     public void paintComponent(Graphics g){
     Graphics2D g2d = (Graphics2D) g;
-    for (int i = 0; i < 16; i++) {
-        if (moveMatrix[i].value != 0 && !gameStruct.isMergeMatrix[i / 4][i % 4]) {
-            BufferedImage image = imageMap.get(moveMatrix[i].value);
-            if (image != null) {
-                g2d.drawImage(image, 85 + (int) (moveMatrix[i].fromX * (10 + cellSize)),
-                        85 + (int) (moveMatrix[i].fromY * (10 + cellSize)), cellSize, cellSize, null);
-            }
-        }
-    }
-    for (int i = 0; i < 16; i++) {
-        if (moveMatrix[i].value != 0 && gameStruct.isMergeMatrix[i / 4][i % 4]) {
-            BufferedImage image = imageMap.get(moveMatrix[i].value);
-            if (image != null) {
-                g2d.drawImage(image, 85 + (int) (moveMatrix[i].fromX * (10 + cellSize)),
-                        85 + (int) (moveMatrix[i].fromY * (10 + cellSize)), cellSize, cellSize, null);
-            }
-        }
-    }
+    drawMove(g2d);
+    drawMerge(g2d);
+    drawRandomNuber(g2d);
     g.setFont(getFont().deriveFont(20f));
     g.setColor(Color.orange);
     g.drawString("Score: " + gameStruct.score, 75, 435);
 
+    }
+
+    public void drawMove(Graphics2D g2d){
+        for (int i = 0; i < 16; i++) {
+            if (moveMatrix[i].value != 0 && !gameStruct.isMergeMatrix[i / 4][i % 4] && i != randomNumberIndex) {
+                BufferedImage image = imageMap.get(moveMatrix[i].value);
+                if (image != null) {
+                    g2d.drawImage(image, 85 + (int) (moveMatrix[i].fromX * (10 + cellSize)),
+                            85 + (int) (moveMatrix[i].fromY * (10 + cellSize)), cellSize, cellSize, null);
+                }
+            }
+        }
+    }
+
+    public void drawRandomNuber(Graphics2D g2d){
+        BufferedImage image = imageMap.get(moveMatrix[randomNumberIndex].value);
+        g2d.drawImage(image, 85 + (int)(moveMatrix[randomNumberIndex].fromX * (10 + cellSize)) + ((cellSize - (int)randomNumberCellSize)/2),85 + (int)(moveMatrix[randomNumberIndex].fromY * (10 + cellSize)) + ((cellSize - (int)randomNumberCellSize)/2),(int)randomNumberCellSize,(int)randomNumberCellSize,null);
+    }
+
+    public void drawMerge(Graphics2D g2d){
+        for (int i = 0; i < 16; i++) {
+            if (moveMatrix[i].value != 0 && gameStruct.isMergeMatrix[i / 4][i % 4]) {
+                BufferedImage image = imageMap.get(moveMatrix[i].value);
+                if (image != null) {
+                    g2d.drawImage(image, 85 + (int) (moveMatrix[i].fromX * (10 + cellSize)) + ((cellSize - (int)mergeCellSize)/2),
+                            85 + (int) (moveMatrix[i].fromY * (10 + cellSize)) + ((cellSize - (int)mergeCellSize) / 2), (int)mergeCellSize, (int)mergeCellSize, null);
+                }
+            }
+        }
     }
 
     public void restartGame(){

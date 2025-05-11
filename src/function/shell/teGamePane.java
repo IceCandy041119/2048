@@ -1,11 +1,11 @@
-package src.function.wind;
+package src.function.shell;
 import javax.swing.*;
 import javax.swing.plaf.basic.BasicInternalFrameTitlePane.SystemMenuBar;
 
-import src.function.game.GameStruct;
-import src.function.game.IsGameOver;
-import src.function.game.Move;
-import src.function.game.RandomNumberGenerate;
+import src.function.core.GameStruct;
+import src.function.core.IsGameOver;
+import src.function.core.Move;
+import src.function.core.RandomNumberGenerate;
 import src.function.music.MoveSound;
 
 import java.awt.*;

@@ -1,4 +1,4 @@
-package src.function.wind;
+package src.function.shell;
 
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
@@ -18,7 +18,7 @@ public class teFrame implements GameEnvironment {
         GameBackground gbg = new GameBackground();
         frame.add(gbg);
         gbg.setLayout(null);
-        teGamePane gamePanel = new teGamePane(new src.function.game.GameStruct());
+        teGamePane gamePanel = new teGamePane(new src.function.core.GameStruct());
         gbg.add(gamePanel);
 
         MusicPlayer musicPlayer = new MusicPlayer();

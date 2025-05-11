@@ -3,11 +3,11 @@ package test;
 import java.awt.event.KeyEvent;
 import java.util.Random;
 
-import src.function.game.GameStruct;
-import src.function.game.Move;
-import src.function.game.PrintSquare;
-import src.function.game.RandomNumberGenerate;
-import src.function.wind.GameEnvironment;
+import src.function.core.GameStruct;
+import src.function.core.Move;
+import src.function.core.PrintSquare;
+import src.function.core.RandomNumberGenerate;
+import src.function.shell.GameEnvironment;
 
 public class test implements GameEnvironment {
     private GameStruct gameStruct;

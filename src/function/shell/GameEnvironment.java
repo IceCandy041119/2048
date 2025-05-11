@@ -1,4 +1,4 @@
-package src.function.wind;
+package src.function.shell;
 
 
 public interface GameEnvironment {

@@ -1,4 +1,4 @@
-package src.function.game;
+package src.function.core;
 
 public class GameStruct {
    public int[][] matrix = new int[4][4];
