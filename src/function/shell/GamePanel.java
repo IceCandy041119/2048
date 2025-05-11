@@ -76,11 +76,9 @@ public class GamePanel extends JPanel implements GameEnvironment {
         long animationTime = 200;
         //long frameTime = 1000 / 60;
         //long nextFrame = x;
-        int fps = 0;
         while(System.currentTimeMillis() - x < animationTime){
             long currentTime = System.currentTimeMillis();
             //while((currentTime = System.currentTimeMillis()) < nextFrame);
-            fps++;
             //nextFrame += frameTime; 
 
             float elapsed = currentTime - x;
@@ -109,7 +107,6 @@ public class GamePanel extends JPanel implements GameEnvironment {
             }
         }
 
-        System.out.println("fps: " + fps);
 
         SwingUtilities.invokeLater(()->{
             if(gameStruct.isMerge == 1 || gameStruct.isMove == 1){

@@ -44,8 +44,7 @@ public class Frame implements GameEnvironment {
                     musicPlayer.preBGM();
                 else if(e.getKeyCode() == KeyEvent.VK_R)
                     gamePanel.restartGame();
-                else
-                   // gamePanel.move(e.getKeyCode());
+                else if(e.getKeyCode() == KeyEvent.VK_DOWN || e.getKeyCode() == KeyEvent.VK_UP || e.getKeyCode() == KeyEvent.VK_LEFT || e.getKeyCode() == KeyEvent.VK_RIGHT)
                    gamePanel.animationMove(e.getKeyCode());
             }
         });
